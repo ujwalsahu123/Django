@@ -1,16 +1,16 @@
 """
-ASGI config for chaiaurDjango project.
+ASGI config for DJANGO_inner project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/
+https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
 """
 
 import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "chaiaurDjango.settings")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DJANGO_inner.settings')
 
 application = get_asgi_application()
