@@ -1,0 +1,363 @@
+{% extends 'food/base.html' %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-2 offset-md-1">
+        <img
+            height="150px"
+            width="250px"
+            class="card"
+            src="{{ item.item_image }}"
+        >
+    </div>
+
+    <div class="col-md-4 offset-md-1">
+        <h1
+            style="
+                font-style: italic;
+            "
+        >
+            {{ item.item_name }}
+        </h1>
+
+        <h2
+            style="
+                font-style: italic;
+                font-size: 1.3rem;
+                text-align: justify;
+            "
+        >
+            {{ item.item_desc }}
+        </h2>
+
+        <h3>
+            ${{ item.item_price }}
+        </h3>
+    </div>
+
+    <div class="col-md-3 offset-md-1">
+
+        {% if user.is_superuser %}
+
+            <a
+                href="{% url 'food:update_item' item.id %}"
+                style="width:80px"
+                class="btn btn-warning"
+            >
+                Edit
+            </a>
+
+            <a
+                href="{% url 'food:delete_item' item.id %}"
+                style="width:80px"
+                class="btn btn-danger"
+            >
+                Delete
+            </a>
+
+            <a
+                href="{% url 'food:index' %}"
+                style="width:80px"
+                class="btn btn-success"
+            >
+                Back
+            </a>
+
+        {% elif user.is_authenticated and user.profile.user_type == 'Rest' %}
+
+            <a
+                href="{% url 'food:update_item' item.id %}"
+                style="width:80px"
+                class="btn btn-warning"
+            >
+                Edit
+            </a>
+
+            <a
+                href="{% url 'food:index' %}"
+                style="width:80px"
+                class="btn btn-success"
+            >
+                Back
+            </a>
+        
+        {% elif user.is_authenticated and user.profile.user_type == 'Cust' %}
+
+            <a
+                href="{% url 'users:orders' item.id item.prod_code user.username %}"
+                style="width:80px"
+                class="btn btn-warning"
+            >
+                Order
+            </a>
+
+            <a
+                href="{% url 'food:index' %}"
+                style="width:80px"
+                class="btn btn-success"
+            >
+                Back
+            </a>
+
+        {% endif %}
+        
+    </div>
+</div>
+
+
+{% if user.is_authenticated %}
+
+    <!-- red -->
+    
+    {% if user.profile.user_type == 'Rest' or user.profile.user_type == 'Admin' %}
+
+        {% for obj in hist %}
+
+            <div
+                class="row mb-1">
+
+                <div
+                    class="col-md-8
+                        offset-md-2
+                        bg-danger
+                        text-white">
+
+                        <div
+                            class="row">
+
+                            <div 
+                                class="col-md-3 
+                                    text-left">
+
+                                {{ obj.user_name }}
+                            </div>
+
+                            <div 
+                                class="col-md-3 
+                                    text-left">
+
+                                {{ obj.prod_ref }}
+                            </div>
+
+                            <div 
+                                class="col-md-3 
+                                    text-left">
+
+                                {{ obj.item_name }}
+                            </div>
+
+                            <div 
+                                class="col-md-3 
+                                    text-left">
+
+                                {{ obj.op_type }}
+                            </div>
+                        </div>
+                </div>
+
+                <div
+                    class="col-md-2">
+                    
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- green -->
+    
+    {% if user.profile.user_type == 'Rest' or user.profile.user_type == 'Cust' or user.profile.user_type == 'Admin' %}
+
+        {% for obj in oco %}
+
+            <div
+                class="row mb-1">
+
+                <div
+                    class="col-md-8
+                        offset-md-2
+                        bg-success
+                        text-white">
+
+                        <div
+                            class="row">
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {{ obj.order_id }}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {{ obj.prod_code }}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {{ obj.quantity }}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {{ obj.user }}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {% if user.profile.user_type == 'Cust' %}
+                                    <a
+                                        class="btn btn-warning btn-sm"
+                                        href="{% url 'users:upd_orders' item.id obj.order_id %}">
+
+                                        Edit Qty
+                                    </a>
+                                {% endif %}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {% if user.profile.user_type == 'Cust' %}
+                                    <a
+                                        class="btn btn-primary btn-sm"
+                                        href="{% url 'users:buy' item.item_price obj.quantity %}">
+                                        
+                                        Buy Now
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                </div>
+
+                <div
+                    class="col-md-2">
+                    
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- add feedback and ratings button -->
+
+    {% if user.profile.user_type == 'Cust' %}
+        <a class="btn btn-dark offset-md-5 mb-2" href="{% url 'users:CusRatFeed' item.id item.prod_code %}">
+            Add Ratings and Feedback
+        </a>
+    {% endif %}
+
+    <!-- blue -->
+    
+    {% if user.profile.user_type == 'Rest' or user.profile.user_type == 'Cust' or user.profile.user_type == 'Admin' %}
+
+        {% for obj in crf %}
+
+            <div
+                class="row mb-1">
+
+                <div
+                    class="col-md-8
+                        offset-md-2
+                        bg-info
+                        text-white">
+
+                        <div
+                            class="row">
+
+                            <div 
+                                class="col-md-1 
+                                    text-left">
+
+                                {{ obj.prod_code }}
+                            </div>
+
+                            <div 
+                                class="col-md-1 
+                                    text-left">
+
+                                {{ obj.ratings }}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {{ obj.feedback }}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {{ obj.username }}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {{ obj.user_type }}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {% if obj.username == user.username %}
+                                    <a
+                                        class="btn btn-warning btn-sm"
+                                        href="{% url 'users:upd_crf' item.id obj.id %}">
+
+                                        Edit
+                                    </a>
+                                {% endif %}
+                            </div>
+
+                            <div 
+                                class="col-md-2 
+                                    text-left">
+
+                                {% if obj.username == user.username %}
+                                    <a
+                                        class="btn btn-primary btn-sm"
+                                        href="{% url 'users:del_crf' item.id obj.id %}">
+                                        
+                                        Delete
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                </div>
+
+                <div
+                    class="col-md-2">
+                    
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endif %}
+
+{% endblock %}

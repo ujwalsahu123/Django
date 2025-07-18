@@ -1,5 +1,0 @@
-so there are 2 folders in the djago . ( college , geeky_shows )
-
-and to use the github and push it go to the root folder not the ( college , or geeky_shows ) folders
-
-we are using a single parent venv . for both - college and 

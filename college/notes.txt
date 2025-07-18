@@ -1,0 +1,19 @@
+in this college folder , there are projects which are taught by alex sir 
+
+such as food app 
+
+
+??????   venv kaha banauu ?????  
+in college folder , or inside food-App-project-1 wala folder
+or like - food-App > venv , my site > food , mysite , ... 
+
+then run the pizza project
+
+then update the repo_info.txt folder    ( how to activate wala part)
+
+then push on github 
+
+then on my laptop - make venv for food proj , and make venv in geeky_shows wala proj
+
+
+and dont push or pull the Venv since - laptop is window and codespaces is linux so conflict hoga and venv will not workout .  

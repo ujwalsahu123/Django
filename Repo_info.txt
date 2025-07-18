@@ -1,0 +1,7 @@
+so there are 2 folders in the django . ( college , geeky_shows )
+
+and to use the github and push it ->  Go to the root folder not the ( college , or geeky_shows ) folders
+
+to start a project ->   
+1 navigate to that folder 
+2 .....   ( where is venv at ? ) 
