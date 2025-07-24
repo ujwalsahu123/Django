@@ -1,0 +1,43 @@
+so there are 2 folders in the django . ( college , geeky_shows )
+
+i am using this repo from my -> local vscode also and by my github codespaces also . 
+
+to push and pull the repo ->  Go to the root folder not the ( college , or geeky_shows ) 
+
+there is a gitignore file which helps to only push pull the necessary things . and not venv , etc folders
+
+the sturcture i am following for django pojects are :  outer folder > venv , manage.py , inner folder .  basically ( Placing venv inside the outer folder )
+
+
+##############################################################################
+ TO START A POJECT IN VSCODE  ->   
+
+in the local vs code - there are venv for each project (inside the outer folder). 
+so you need to active the venv.
+
+1 navigate to that Project folder (outer)
+2 .
+
+
+##############################################################################
+ TO START A PROJECT IN CODESPACES  ->   
+
+in the github codespaces - there is no venv.  all the packages ( django , pillow , etc ) are in the global , since the codespaces dosent support venv. 
+so no need to activate venv , etc. 
+
+1 Go to the specific project (ourter) folder: $ cd college/Food-App-P1/mysite/
+2 python manage.py runserver 0.0.0.0:8000
+3 urls : {
+    food: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/food/home/
+    register: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/register/
+    login: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/login/
+    profile: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/profile/
+    admin: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/admin/
+}
+
+
+####################
+
+frequently do push , pull after each lecture or study . from the codespaces and vscode .
+
+Never do this : dont push or pull the venv folder to github repo , since - laptop is window and codespaces is linux so conflict hoga and venv will not workout .  
