@@ -31,7 +31,7 @@ so you need to active the venv.
  TO START A PROJECT IN CODESPACES  ->   
 
 in the github codespaces - there is no venv.  all the packages ( django , pillow , etc ) are in the global , since the codespaces dosent support venv. 
-so no need to activate venv , etc. 
+so no need to activate venv , etc.  directly run the project/server.
 
 1 Go to the specific project (ourter) folder: $ cd college/Food-App-P1/mysite/
 2 python manage.py runserver 0.0.0.0:8000
