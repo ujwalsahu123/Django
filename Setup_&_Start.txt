@@ -5,6 +5,7 @@ i am using this repo from my -> local vscode also and by my github codespaces al
 to push and pull the repo ->  Go to the root folder (DJANGO) not the ( college , or geeky_shows ) 
 
 there is a gitignore file which helps to only push pull the necessary things . and not venv , etc folders
+we are also pushing the db.sqlite to the github. so we have commented out the db.sqlite in the gitignore.
 
 the sturcture i am following for django pojects are :  outer folder > venv , manage.py , inner folder .  basically ( Placeing venv inside the outer folder )
 
@@ -16,8 +17,8 @@ in the local vs code - there are venv for each project (inside the outer folder)
 so you need to active the venv.
 
 1 navigate to that Project folder (outer)
-2 venv/Scripts/activate  ,  source venv/bin/activate
-3 python manage.py runserver
+2 $ venv/Scripts/activate  ,  source venv/bin/activate
+3 $ python manage.py runserver
 4 urls:{
     http://127.0.0.1:8000/food/home/
     http://127.0.0.1:8000/register/ 
@@ -33,8 +34,8 @@ so you need to active the venv.
 in the github codespaces - there is no venv.  all the packages ( django , pillow , etc ) are in the global , since the codespaces dosent support venv. 
 so no need to activate venv , etc.  directly run the project/server.
 
-1 Go to the specific project (ourter) folder: $ cd college/Food-App-P1/mysite/
-2 python manage.py runserver 0.0.0.0:8000
+1 Go to the specific project (outer) folder: $ cd college/Food-App-P1/mysite/
+2 $ python manage.py runserver 0.0.0.0:8000
 3 urls for Food-App-Project : {
     food: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/food/home/
     register: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/register/
@@ -66,3 +67,4 @@ If you are CLONENING someones django project then you would have to do the setup
 $ python manage.py migrate
 $ python manage.py createsuperuser
 etc ...
+
