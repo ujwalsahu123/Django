@@ -6,7 +6,7 @@ to push and pull the repo ->  Go to the root folder not the ( college , or geeky
 
 there is a gitignore file which helps to only push pull the necessary things . and not venv , etc folders
 
-the sturcture i am following for django pojects are :  outer folder > venv , manage.py , inner folder .  basically ( Placing venv inside the outer folder )
+the sturcture i am following for django pojects are :  outer folder > venv , manage.py , inner folder .  basically ( Placeing venv inside the outer folder )
 
 
 ##############################################################################
@@ -16,7 +16,15 @@ in the local vs code - there are venv for each project (inside the outer folder)
 so you need to active the venv.
 
 1 navigate to that Project folder (outer)
-2 .
+2 venv/Scripts/activate  ,  source venv/bin/activate
+3 python manage.py runserver
+4 urls:{
+    http://127.0.0.1:8000/food/home/
+    http://127.0.0.1:8000/register/ 
+    http://127.0.0.1:8000/login/
+    http://127.0.0.1:8000/admin/
+    http://127.0.0.1:8000/profile/
+}   
 
 
 ##############################################################################
@@ -27,7 +35,7 @@ so no need to activate venv , etc.
 
 1 Go to the specific project (ourter) folder: $ cd college/Food-App-P1/mysite/
 2 python manage.py runserver 0.0.0.0:8000
-3 urls : {
+3 urls for Food-App-Project : {
     food: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/food/home/
     register: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/register/
     login: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/login/
@@ -35,9 +43,26 @@ so no need to activate venv , etc.
     admin: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/admin/
 }
 
+##############################################################################
+TO SETUP A NEW PROJECT IN VSCODE -> 
 
-####################
+1 $ pip install virtualenv ( if not installed )
+2 make a New Project folder (outer) and Navigate to it.
+3 $ virtualenv env (create a venv inside the outer folder)
+4 $ venv\Scripts\activate 
+5 $ pip install django
+6 $ django-admin startproject inner_folder_name .
+
+ 
+################################################################################
 
 frequently do push , pull after each lecture or study . from the codespaces and vscode .
 
-Never do this : dont push or pull the venv folder to github repo , since - laptop is window and codespaces is linux so conflict hoga and venv will not workout .  
+Never do this : dont push or pull the venv folder to github repo , since - laptop is window and codespaces is linux so conflict hoga and venv will not workout .
+
+################################################################################
+
+If you are CLONENING someones django project then you would have to do the setup . and do things like:
+$ python manage.py migrate
+$ python manage.py createsuperuser
+etc ...
