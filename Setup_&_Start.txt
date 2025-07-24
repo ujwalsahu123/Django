@@ -2,7 +2,7 @@ so there are 2 folders in the django . ( college , geeky_shows )
 
 i am using this repo from my -> local vscode also and by my github codespaces also . 
 
-to push and pull the repo ->  Go to the root folder not the ( college , or geeky_shows ) 
+to push and pull the repo ->  Go to the root folder (DJANGO) not the ( college , or geeky_shows ) 
 
 there is a gitignore file which helps to only push pull the necessary things . and not venv , etc folders
 
@@ -48,10 +48,10 @@ TO SETUP A NEW PROJECT IN VSCODE ->
 
 1 $ pip install virtualenv ( if not installed )
 2 make a New Project folder (outer) and Navigate to it.
-3 $ virtualenv env (create a venv inside the outer folder)
+3 $ virtualenv env (create a venv inside the outer folder {outer > venv})
 4 $ venv\Scripts\activate 
 5 $ pip install django
-6 $ django-admin startproject inner_folder_name .
+6 $ django-admin startproject inner_folder_name .  {OUTER > venv , manage.py , INNER}
 
  
 ################################################################################
