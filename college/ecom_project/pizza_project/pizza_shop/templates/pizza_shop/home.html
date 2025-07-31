@@ -1,0 +1,42 @@
+{% extends 'pizza_shop/base.html' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Our Pizza Menu</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for pizza in pizzas %}
+    <div class="col">
+        <div class="card h-100 pizza-card">
+            {% if pizza.image %}
+                <img src="{{ pizza.image.url }}" class="card-img-top" alt="{{ pizza.name }}" style="height: 200px; object-fit: cover;">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ pizza.name }}</h5>
+                <p class="card-text">{{ pizza.description }}</p>
+                <p class="card-text">
+                    <small class="text-muted">Size: {{ pizza.get_size_display }}</small><br>
+                    <small class="text-muted">Toppings: {{ pizza.toppings }}</small>
+                </p>
+                <h6 class="card-subtitle mb-2 text-primary">${{ pizza.price }}</h6>
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'add_to_cart' pizza.id %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login to Order</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">
+            No pizzas available at the moment.
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

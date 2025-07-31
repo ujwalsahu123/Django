@@ -1,0 +1,71 @@
+{% extends 'pizza_shop/base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="mb-4">Checkout</h1>
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="address" class="form-label">Delivery Address</label>
+                <textarea name="address" id="address" class="form-control" rows="3" required></textarea>
+                <div class="invalid-feedback">
+                    Please enter your delivery address.
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" name="phone" id="phone" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please enter your phone number.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Place Order</button>
+            <a href="{% url 'cart_detail' %}" class="btn btn-outline-primary">Back to Cart</a>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Order Summary</h5>
+            </div>
+            <div class="card-body">
+                {% for item in cart.cartitem_set.all %}
+                <div class="d-flex justify-content-between mb-2">
+                    <span>{{ item.pizza.name }} (x{{ item.quantity }})</span>
+                    <span>${{ item.subtotal }}</span>
+                </div>
+                {% endfor %}
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <strong>Total:</strong>
+                    <strong>${{ cart.total }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Form validation script
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
+</script>
+{% endblock %}
