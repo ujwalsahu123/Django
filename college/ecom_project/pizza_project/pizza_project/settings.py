@@ -136,3 +136,9 @@ LOGIN_URL = '/accounts/login/'
 # Login/Logout URLs
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Razorpay Settings
+RAZORPAY_KEY_ID = 'rzp_test_mPQlkUHWVOWAtD'
+RAZORPAY_KEY_SECRET = 'XjKMA5xgHXrYMRSIptwn6MuM'
+RAZORPAY_CURRENCY = 'INR'
+RAZORPAY_TEST_MODE = True  # Set to False in production

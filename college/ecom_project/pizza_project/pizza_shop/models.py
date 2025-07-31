@@ -50,6 +50,12 @@ class Order(models.Model):
         ('CANCELLED', 'Cancelled'),
     ]
     
+    PAYMENT_STATUS_CHOICES = [
+        ('PENDING', 'Pending'),
+        ('PAID', 'Paid'),
+        ('FAILED', 'Failed'),
+    ]
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ManyToManyField(Pizza, through='OrderItem')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
@@ -58,6 +64,16 @@ class Order(models.Model):
     delivery_address = models.TextField()
     phone_number = models.CharField(max_length=15)
     total_amount = models.DecimalField(max_digits=8, decimal_places=2)
+    
+    # Razorpay payment fields
+    razorpay_order_id = models.CharField(max_length=200, blank=True, null=True)
+    razorpay_payment_id = models.CharField(max_length=200, blank=True, null=True)
+    razorpay_signature = models.CharField(max_length=500, blank=True, null=True)
+    payment_status = models.CharField(
+        max_length=20,
+        choices=PAYMENT_STATUS_CHOICES,
+        default='PENDING'
+    )
     
     def __str__(self):
         return f"Order #{self.id} by {self.user.username}"

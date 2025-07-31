@@ -3,6 +3,8 @@ from . import views
 
 urlpatterns = [
     path('chatbot/', views.chatbot, name='chatbot'),
+    path('payment/initiate/<int:order_id>/', views.initiate_payment, name='initiate_payment'),
+    path('payment/callback/', views.payment_callback, name='payment_callback'),
     path('', views.home, name='home'),
     path('pizza/<int:pizza_id>/', views.pizza_detail, name='pizza_detail'),
     path('add-to-cart/<int:pizza_id>/', views.add_to_cart, name='add_to_cart'),
