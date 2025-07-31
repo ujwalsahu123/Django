@@ -1,11 +1,20 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import JsonResponse
 from .models import Pizza, Cart, CartItem, Order, OrderItem
+from .ai_chat import get_ai_response
 
 def home(request):
     pizzas = Pizza.objects.filter(is_available=True)
     return render(request, 'pizza_shop/home.html', {'pizzas': pizzas})
+
+def chatbot(request):
+    if request.method == 'POST':
+        message = request.POST.get('message', '')
+        response = get_ai_response(message)
+        return JsonResponse({'response': response})
+    return JsonResponse({'error': 'Invalid request method'})
 
 def pizza_detail(request, pizza_id):
     pizza = get_object_or_404(Pizza, id=pizza_id)
