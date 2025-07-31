@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ctn=9s1yw&$n25xli65v1@f3#_vk^^vzl6dp&d75hl5gmz)gsz"
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-ctn=9s1yw&$n25xli65v1@f3#_vk^^vzl6dp&d75hl5gmz)gsz')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -128,6 +133,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Gemini AI Settings
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+
 # Authentication settings
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -138,7 +146,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Razorpay Settings
-RAZORPAY_KEY_ID = 'rzp_test_mPQlkUHWVOWAtD'
-RAZORPAY_KEY_SECRET = 'XjKMA5xgHXrYMRSIptwn6MuM'
-RAZORPAY_CURRENCY = 'INR'
-RAZORPAY_TEST_MODE = True  # Set to False in production
+RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET')
+RAZORPAY_CURRENCY = os.getenv('RAZORPAY_CURRENCY', 'INR')
+RAZORPAY_TEST_MODE = os.getenv('RAZORPAY_TEST_MODE', 'True') == 'True'  # Set to False in production

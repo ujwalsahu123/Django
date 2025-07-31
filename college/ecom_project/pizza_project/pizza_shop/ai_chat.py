@@ -1,9 +1,10 @@
 import google.generativeai as genai
+from django.conf import settings
 from .models import Pizza
 import json
 
 # Configure the Gemini AI
-genai.configure(api_key="AIzaSyCYEyMV5-qnVC1zoA-Pz4iiSV-NlLJ53Vo")
+genai.configure(api_key=settings.GEMINI_API_KEY)
 
 # Initialize the model with the working model version
 model = genai.GenerativeModel("models/gemini-2.5-pro")
