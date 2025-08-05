@@ -8,6 +8,15 @@ class Profile(models.Model):
     image = models.ImageField(default='profilepic.jpg', upload_to='profile_pictures')
     location = models.CharField(max_length=100)
     user_type = models.CharField(max_length=200, default='users')
+    
+    USER_TYPE_CHOICES = (
+        ("SELECT", "SELECT"),
+        ("RESTAURANT", "RESTAURANT"),
+        ("CUSTOMER", "CUSTOMER"),
+        ("ADMIN", "ADMIN"),
+    )
+
+    user_type = models.CharField(choices=USER_TYPE_CHOICES, default='SELECT')
 
     def __str__(self):
         return self.user.username
