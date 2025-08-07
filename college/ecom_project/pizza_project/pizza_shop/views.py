@@ -220,3 +220,14 @@ def order_detail(request, order_id):
 def order_history(request):
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'pizza_shop/order_history.html', {'orders': orders})
+
+# Custom logout view for confirmation and POST logout
+from django.contrib.auth import logout as auth_logout
+from django.urls import reverse
+from django.shortcuts import render, redirect
+
+def logout_view(request):
+    if request.method == 'POST':
+        auth_logout(request)
+        return redirect('home')
+    return render(request, 'registration/logged_out.html')

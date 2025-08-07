@@ -20,14 +20,7 @@
                     <small class="text-muted">Toppings: {{ pizza.toppings }}</small>
                 </p>
                 <h6 class="card-subtitle mb-2 text-primary">${{ pizza.price }}</h6>
-                {% if user.is_authenticated %}
-                    <form method="post" action="{% url 'add_to_cart' pizza.id %}" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary">Add to Cart</button>
-                    </form>
-                {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-primary">Login to Order</a>
-                {% endif %}
+                <a href="{% url 'pizza_detail' pizza.id %}" class="btn btn-info">Details</a>
             </div>
         </div>
     </div>
