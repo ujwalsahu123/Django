@@ -2,33 +2,16 @@
 
 {% block body %}
 
-<br><br><br>
+<form method="POST">
+    {% csrf_token %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <div class="card">
-                <div class="card-header text-white bg-info">
-                    <div class="card-title">
-                        Login
-                    </div>
-                </div>
-                <div class="card-body">
-                    <form method="POST">
-                        {% csrf_token %}
-                    
-                        <label class="offset-md-1" for="user">Username:</label><br>
-                        <input class="offset-md-1" type="text" id="user" name="username"><br>
-                    
-                        <label class="offset-md-1" for="pass">Password:</label><br>
-                        <input class="offset-md-1" type="password" id="pass" name="password">
-                    
-                        <button class="btn btn-success btn-sm" type="submit">Login</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <br><label for="username">Username: </label><br>
+    <input type="text" id="username" name="username"><br>
+
+    <br><label for="password">Password: </label><br>
+    <input type="password" id="password" name="password"><br>
+
+    <br><button type="submit">login</button>
+</form>
 
 {% endblock %}

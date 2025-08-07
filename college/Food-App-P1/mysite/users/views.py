@@ -1,200 +1,101 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from users.forms import RegisterForm
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from users.models import CusOrders, CusRatingFeedback
-from users.forms import CusOrdersUpd, CusRatFeedForm
-from django.http import JsonResponse
-import json
+from django.shortcuts import render, redirect 
+from django.contrib.auth.forms import UserCreationForm 
+from django.contrib import messages 
+from users.forms import RegisterForm 
+from django.contrib.auth import authenticate, login, logout 
+from django.contrib.auth.decorators import login_required 
 
 # Create your views here.
+# ---------------------------------------------------------------------------------------------- 
 
 
-def register(request):
+# sign up page 
+# ---------------------------------------------------------------------------------------------- 
+def RegisterFunctionView(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
-
         if form.is_valid():
             username = form.cleaned_data.get('username')
             messages.success(
-                request, 
-                'Welcome {}, your account has been successfully created. Now you may log in'.format(username)
+                request,
+                'Welcome {}, you have been successfully signed up!'.format(username)
             )
             form.save()
-            return redirect('login')
+            return redirect('food:home')
 
     else:
-        form = RegisterForm()
+        form = RegisterForm(None)
 
-        context = {
-            'form':form
-        }
+    context = {
+        "form": form
+    }
+    
+    return render(request, "users/register.html", context)
 
-        return render(request, 'users/register.html', context)
 
-
-def login_view(request):
-
+# login page 
+# ---------------------------------------------------------------------------------------------- 
+def LoginFunctionView(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-
-        if user is None:
+        
+        auth_username = authenticate(request, username=username, password=password)
+        
+        if auth_username is None:
             messages.success(
                 request,
-                'Invalid Login, try again'
+                'Invalid Login, Try Again!'
             )
             return redirect('login')
 
-        elif user.is_superuser:
-            login(request, user)
+        elif auth_username.is_superuser:
+            login(request, auth_username)
             messages.success(
                 request,
-                'Welcome Superuser {}, you have been successfully logged in'.format(request.user.username)
+                'Superuser login accessed: {}'.format(auth_username)
             )
-            return redirect('food:index')
+            return redirect('food:home')
 
-        elif user is not None:
-            login(request, user)
+        elif auth_username.is_authenticated:
+            login(request, auth_username)
             messages.success(
                 request,
-                'Welcome {}, you have been successfully logged in'.format(request.user.username)
+                'Welcome {}, you have been successfully logged in!'.format(auth_username)
             )
-            return redirect('food:index')
+            return redirect('food:home')
 
-    return render(request, 'users/login.html')
-
-
-def logout_view(request):
-    messages.success(
-        request,
-        '{}, you have successfully logged out'.format(request.user.username)
-    )
-    logout(request)
-    return redirect('food:index')
+    return render(request, "users/login.html")
 
 
-@login_required
-def profilepage(request):
-    return render(request, 'users/profile.html')
-
-
-def Orders(request, id, pdcd, user):
-
-    context = {
-        'pdcd':pdcd,
-        'user':user
-    }
-
+# logout page 
+# ---------------------------------------------------------------------------------------------- 
+def LogoutFunctionView(request):
+    username = request.user.username
+    
     if request.method == 'POST':
-        
-        Obj_CusOrds = CusOrders(
-            prod_code=pdcd,
-            user=user,
-            quantity=request.POST.get('qty')
+        logout(request)
+        messages.success(
+            request,
+            "{}, you have been successfully logged out!".format(username)
         )
-
-        Obj_CusOrds.save()
-
-        return redirect('food:detail', item_id=id)
-
-    return render(request, 'users/orders.html', context)
-
-
-def update_orders(request, id, upd_order_id):
-
-    coo = CusOrders.objects.get(order_id=upd_order_id)
-    form = CusOrdersUpd(request.POST or None, instance=coo)
-
-    context = {
-        'form':form
-    }
-
-    if request.method == 'POST':
-        form.instance.order_id = coo.order_id
-        form.instance.prod_code = coo.prod_code
-        form.instance.user = request.user.username
-        form.save()
-        return redirect('food:detail', item_id=id)
-
-    return render(request, 'users/orders_upd.html', context)
-
-
-def CusRatFeed(request, it_id, pc):
-
-    form = CusRatFeedForm(request.POST or None)
-
-    context = {
-        'form':form
-    }
-
-    if request.method == 'POST':
-        form.instance.prod_code = pc
-        form.instance.username = request.user.username
-        form.save()
-        return redirect('food:detail', item_id=it_id)
-
-    return render(request, 'users/item-form.html', context)
-
-
-def update_crf(request, details_id, crf_id):
+        return redirect('login')
     
-    crfo = CusRatingFeedback.objects.get(pk=crf_id)
-    form = CusRatFeedForm(request.POST or None, instance=crfo)
-
     context = {
-        'form':form
+        'username': username
     }
-
-    if form.is_valid():
-        form.save()
-        return redirect('food:detail', item_id=details_id)
-
-    return render(request, 'users/crf_upd.html', context)
-
-
-def delete_crf(request, details_id, crf_id):
     
-    crfo = CusRatingFeedback.objects.get(pk=crf_id)
+    return render(request, "users/logout.html", context)
 
-    context = {
-        'crfo':crfo
-    }
+# profile page 
+# ---------------------------------------------------------------------------------------------- 
+# @login_required
+# def ProfileFunctionView(request):
+#     return render(request, "users/profile.html")
 
-    if request.method == 'POST':
-        crfo.delete()
-        return redirect('food:detail', item_id=details_id)
-
-    return render(request, 'users/crf_del.html', context)
-
-
-def Payment(request, amt, qnt):
-
-    context = {
-        'amt':amt,
-        'qnt':qnt,
-        'tot':amt * qnt
-    }
-
-    return render(request, 'users/payment.html', context)
-
-
-def OnApprove(request):
-
-    if request.method == 'POST':
-        body = json.loads(request.body)
-        print(body)
-
-        context = {
-
-        }
-
-        return JsonResponse(context)
-
-
-def PaymentSuccess(request):
-
-    return render(request, 'users/pymtsuccess.html')
+# profile page
+# ----------------------------------------------------------------------------------------------
+def ProfileFunctionView(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    return render(request, "users/profile.html")

@@ -4,8 +4,8 @@
 
 <form method="POST">
     {% csrf_token %}
-    {{ form }}
-    <button type="submit">Confirm</button>
+    <h3>{{ username }}, are you sure, you want to logout?</h3>
+    <button type="submit">Yes</button>
 </form>
 
 {% endblock %}

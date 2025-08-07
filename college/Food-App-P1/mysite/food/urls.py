@@ -1,43 +1,60 @@
-from django.urls import path, include
+from django.urls import path
 from food import views
 
 app_name = 'food'
 
 urlpatterns = [
-
-    # function based index view
-    # -------------------------------------------------------------------------------
-    path('home/', views.index, name='index'),
-
-    # class based index view
-    # -------------------------------------------------------------------------------
-    # path('home/', views.IndexClassView.as_view(), name='index'),
-
+   
+    # http://localhost:8000/food/home/
+    # function based home view
+    # ---------------------------------------------------------------------------------------------
+    path('home/', views.HomeFunctionView, name='home'),
+   
+   
+   
+    # http://localhost:8000/food/home/
+    # class based home view
+    # ---------------------------------------------------------------------------------------------
+    # path('home/', views.HomeClassView.as_view(), name='home'),
+   
+   
+   
+    # http://localhost:8000/food/detail/1/
     # function based detail view
-    # -------------------------------------------------------------------------------
-    path('detail/<int:item_id>/', views.detail, name='detail'),
-
+    # ---------------------------------------------------------------------------------------------
+    # path('detail/<int:item_id>/', views.DetailFunctionView, name='detail'),
+   
+   
+   
+    # http://localhost:8000/food/detail/1/
     # class based detail view
-    # -------------------------------------------------------------------------------
-    # path('detail/<int:pk>/', views.FoodDetail.as_view(), name='detail'),
-
+    # ---------------------------------------------------------------------------------------------
+    path('detail/<int:pk>/', views.DetailClassView.as_view(), name='detail'),
+   
+   
+   
+    # http://localhost:8000/food/add/
     # function based create item view
-    # -------------------------------------------------------------------------------
-    # path('add/', views.create_item, name='create_item'),
-
+    # ---------------------------------------------------------------------------------------------
+    # path('add/', views.CreateFoodItemFunctionView, name='add'),
+   
+   
+   
+    # http://localhost:8000/food/add/
     # class based create item view
-    # -------------------------------------------------------------------------------
-    path('add/', views.CreateItem.as_view(), name='create_item'),
-
-    # function based update item view
-    # -------------------------------------------------------------------------------
-    path('update/<int:id>/', views.update_item, name='update_item'),
-
-    # function based delete item view
-    # -------------------------------------------------------------------------------
-    path('delete/<int:id>/', views.delete_item, name='delete_item'),
-
-    # navbar form
-    # -------------------------------------------------------------------------------
-    path('navform/', views.NavForm, name='navform'),
+    # ---------------------------------------------------------------------------------------------
+    path('add/', views.CreateFoodItemClassView.as_view(), name='add'),
+   
+   
+   
+    # http://localhost:8000/food/update/
+    # ---------------------------------------------------------------------------------------------
+    path('update/<int:item_id>/', views.UpdateFoodItemFunctionView, name='update'),
+   
+   
+   
+    # http://localhost:8000/food/delete/
+    # ---------------------------------------------------------------------------------------------
+    path('delete/<int:item_id>/', views.DeleteFoodItemFunctionView, name='delete'),
+   
 ]
