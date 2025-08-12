@@ -1,0 +1,2 @@
+make a .env file and then put the info in it . 
+pip install -r requirements.txt

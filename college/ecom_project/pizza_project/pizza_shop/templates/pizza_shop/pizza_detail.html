@@ -1,0 +1,30 @@
+{% extends 'pizza_shop/base.html' %}
+
+{% block title %}Pizza Details{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>{{ pizza.name }}</h2>
+            {% if pizza.image %}
+                <img src="{{ pizza.image.url }}" alt="{{ pizza.name }}" class="img-fluid mb-3" style="max-height:300px;object-fit:cover;">
+            {% endif %}
+            <p>{{ pizza.description }}</p>
+            <p><strong>Size:</strong> {{ pizza.get_size_display }}</p>
+            <p><strong>Toppings:</strong> {{ pizza.toppings }}</p>
+            <h4 class="text-primary">${{ pizza.price }}</h4>
+        </div>
+        <div class="col-md-4 text-end">
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'add_to_cart' pizza.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success mt-2">Add to Cart</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary mt-2">Login to Order</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
