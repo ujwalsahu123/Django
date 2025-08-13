@@ -1,4 +1,4 @@
-so there are 2 folders in the django . ( college , geeky_shows )
+so there are 2 folders in the django . ( project , geeky_shows )
 
 i am using this repo from my -> local vscode also and by my github codespaces also . 
 
@@ -7,7 +7,6 @@ to push and pull the repo ->  Go to the root folder (DJANGO) not the ( college ,
 there is a gitignore file which helps to only push pull the necessary things . and not venv , etc folders
 we are also pushing the db.sqlite to the github. so we have commented out the db.sqlite in the gitignore.
 
-the sturcture i am following for django pojects are :  outer folder > venv , manage.py , inner folder .  basically ( Placeing venv inside the outer folder )
 
 
 ##############################################################################

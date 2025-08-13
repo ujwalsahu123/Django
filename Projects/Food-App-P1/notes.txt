@@ -1,6 +1,3 @@
-in this college folder , there are projects which are taught by alex sir 
-
-such as food app project.
 
 food: https://ominous-funicular-5wr64jw797rc49wp-8000.app.github.dev/food/home/
 
