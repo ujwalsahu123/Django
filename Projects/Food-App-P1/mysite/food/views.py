@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect 
 from django.http import HttpResponse
-from food.models import FoodItemsModel
+from food.models import FoodItemsModel, LogHistoryModel
 from food.forms import FoodItemsForm 
 from django.views.generic.list import ListView 
 from django.views.generic.detail import DetailView 
@@ -45,8 +45,12 @@ class HomeClassView(ListView):
 def DetailFunctionView(request, item_id):
     item = FoodItemsModel.objects.get(id=item_id)
     
+    object_lh = LogHistoryModel.objects.all()
+
+
     context = {
         'item': item
+        'object_lh': object_lh,
     }
     
     return render(request, "food/detail.html", context)
@@ -84,7 +88,23 @@ class CreateFoodItemClassView(CreateView):
     success_url = reverse_lazy("food:home")
 
     def form_valid(self,form):
+       form.instance.admin = self.request.user.username
+       
+       #Logging the record to the history table 
+
+       object_log_history = LogHistoryModel(
+           Log_username = self.request.user.username,
+           log_prod_code =form.instance.prod_code,  # self.request.POST.get('prod_code'),
+           log_item_name = form.instance.item_name,  # self.request.POST.get('item_name'),
+           log_operation_type =  ,
+
+       )
+        object_log_hostory.save()
+
+
        return super().form_valid(form)
+    
+        
 
 
 # function based update item view 
