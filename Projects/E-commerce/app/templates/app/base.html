@@ -33,8 +33,8 @@
             flex-direction: column;
         }
         .chatbot-header {
-            background: #007bff;
-            color: #fff;
+            background: #ffc107; /* Yellow header for chatbot */
+            color: #343a40; /* Dark text */
             padding: 15px;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
@@ -65,14 +65,35 @@
             background: #f1f8ff;
             text-align: left;
         }
+        /* Inline styles for additional UI tweaks */
+        .chatbot-message.user-message {
+            background: #e9ecef; /* Light gray for user messages */
+        }
+        .chatbot-message.bot-message {
+            background: #f1f8ff; /* Light blue for bot messages */
+        }
+        /* Inline styles for additional tweaks */
+        .navbar .nav-item .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: 2px solid #4caf50;
+            background-color: #ffffff;
+            color: #4caf50;
+            transition: all 0.3s ease;
+        }
+        .navbar .nav-item .btn:hover {
+            background-color: #388e3c;
+            color: #ffffff;
+        }
     </style>
 
-    <title>ShoppingX | {% block title %} {% endblock title %} </title>
+    <title>NexaMart | {% block title %} {% endblock title %} </title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
      <div class="container">
-       <a class="navbar-brand" href="/">ShoppingX</a>
+       <a class="navbar-brand" href="/">NexaMart</a>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
@@ -103,10 +124,7 @@
              <button id="chatbotNavbarBtn" class="btn btn-warning ms-2">Chatbot</button>
            </li>
          </ul>
-         <form class="d-flex">
-           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-           <button class="btn btn-warning" type="submit">S</button>
-         </form>
+         <!-- Search bar and right section removed as requested -->
          <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {% if request.user.is_authenticated %}
@@ -162,7 +180,7 @@
 
     <!-- Start Footer -->
     <footer class="container-fluid bg-dark text-center p-2 mt-5">
-        <small class="text-white">Copyright &copy; 2021 || Designed By GeekyShows || </small>
+        <small class="text-white">Copyright &copy; 2021 || Designed By ujwal sahu || </small>
         <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
     </footer> <!-- End Footer -->
 

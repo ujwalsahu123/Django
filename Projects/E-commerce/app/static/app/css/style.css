@@ -19,3 +19,72 @@
  font-size: 24px;
  font-weight: bold;
 }
+
+/* Completely revamped styling */
+
+/* Updated Navbar Styling */
+.navbar {
+    background-color: #4caf50 !important; /* Green background */
+    padding: 1.2rem; /* Adjusted size */
+}
+.navbar .nav-link {
+    color: #ffffff !important; /* White text */
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.navbar .nav-link:hover {
+    background-color: #388e3c !important; /* Darker green on hover */
+    color: #ffffff !important; /* White text */
+}
+.navbar .btn {
+    background-color: #ffffff !important; /* White buttons */
+    color: #4caf50 !important; /* Green text */
+    border: 2px solid #4caf50;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+.navbar .btn:hover {
+    background-color: #388e3c !important; /* Darker green on hover */
+    color: #ffffff !important;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #16213e;
+    color: #fff;
+    padding: 1.5rem;
+}
+footer a {
+    color: #e94560;
+    text-decoration: none;
+}
+footer a:hover {
+    color: #fff;
+}
+
+/* Simplified Chatbot Button Styling */
+#chatbotNavbarBtn {
+    background-color: #ffffff !important; /* White background */
+    color: #4caf50 !important; /* Green text */
+    border: 2px solid #4caf50;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+#chatbotNavbarBtn:hover {
+    background-color: #388e3c !important; /* Darker green on hover */
+    color: #ffffff !important;
+}
+
+/* Chatbot Popup Styling */
+.chatbot-popup {
+    background: #0f3460;
+    border: 2px solid #e94560;
+}
+.chatbot-header {
+    background: #e94560;
+    color: #fff;
+}
