@@ -44,8 +44,7 @@ def add_to_cart(request):
 		return redirect('/cart')
 	else:
 		return redirect('/cart')
-  # Below Code is used to return to same page
-  # return redirect(request.META['HTTP_REFERER'])
+
 
 @login_required
 def show_cart(request):
