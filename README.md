@@ -26,3 +26,6 @@ deliver a reliable and enjoyable shopping experience.
 10. Order History: View past orders and their statuses.
 
 <img src="/E-commerce project/ER_Diagram.png">
+
+
+for further information about this project, you can look up the - Ecommerce project folder, and the pdf insided it.
