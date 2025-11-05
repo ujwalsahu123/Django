@@ -1,0 +1,20 @@
+1.pip install -r requirements.txt
+
+2.make a .env file and then put the info in it . 
+
+# Django Secret Key
+DJANGO_SECRET_KEY=
+
+# Razorpay Credentials
+# RAZORPAY_KEY_ID=
+# RAZORPAY_KEY_SECRET=
+
+# Gemini AI API Key
+GEMINI_API_KEY=
+
+# Add any other API keys here
+
+3. run django commands in terminal 
+$ python manage.py migrate
+$ python manage.py createsuperuser
+etc commands to sync the project.

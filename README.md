@@ -25,4 +25,4 @@ deliver a reliable and enjoyable shopping experience.
 9. Dynamic Product Display: Products displayed with real-time pricing and discounts. 
 10. Order History: View past orders and their statuses.
 
-<img src="ER_Diagram.png">
+<img src="/E-commerce project/ER_Diagram.png">

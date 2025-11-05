@@ -6,7 +6,7 @@ __pycache__/
 local_settings.py
 # db.sqlite3        <- commented out to allow sharing
 # db.sqlite3-journal <- commented out to allow sharing
-media
+# media
 
 # If you are using pipenv or virtualenv
 /venv/
